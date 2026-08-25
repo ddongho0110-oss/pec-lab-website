@@ -54,7 +54,7 @@ img { display: block; max-width: 100%; }
 .intro-copy { padding-top: 38px; }
 .intro-copy p { font-size:18px; line-height:1.7; color:var(--muted); margin:0 0 25px; }
 .text-link { font-size:13px; font-weight:800; border-bottom:1px solid var(--ink); padding-bottom:3px; }
-.research-feature { display:grid; grid-template-columns: 1fr 1fr; min-height:650px; background:#0c2224; color:white; }
+.research-feature { display:grid; grid-template-columns: 1.15fr 0.85fr; min-height:650px; background:#0c2224; color:white; }
 .research-image img { width:100%; height:100%; object-fit:contain; }
 .research-cards { display:grid; }
 .research-card { padding:44px 54px; border-bottom:1px solid rgba(255,255,255,.15); display:grid; grid-template-columns:50px 1fr; column-gap:24px; align-content:center; }
