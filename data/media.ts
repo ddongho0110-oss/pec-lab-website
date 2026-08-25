@@ -4,7 +4,7 @@
 
 export const media = {
   hero: {
-    local: "/images/hero/pec-hero.jpg",
+    local: "/images/hero/hero-main.png",
     fallback: "https://static.wixstatic.com/media/11062b_715e97bca3d7464389d8c02b4a5a49eaf000.jpg/v1/fill/w_980%2Ch_551%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/11062b_715e97bca3d7464389d8c02b4a5a49eaf000.jpg",
   },
   researchFeature: {
