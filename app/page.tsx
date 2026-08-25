@@ -1,7 +1,8 @@
 import Link from "next/link";
 import FallbackImage from "../components/FallbackImage";
 import { media } from "../data/media";
-import { news, publications } from "../data/siteData";
+import { news } from "../data/news";
+import { publications } from "../data/publications";
 
 export default function Home() {
   return (

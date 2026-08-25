@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import FallbackImage from "../../components/FallbackImage";
 import PageHero from "../../components/PageHero";
 import { media } from "../../data/media";
-import { gallery } from "../../data/siteData";
+import { gallery } from "../../data/gallery";
 
 export const metadata: Metadata = { title: "Gallery" };
 

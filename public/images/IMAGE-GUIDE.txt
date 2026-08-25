@@ -5,7 +5,7 @@ This lets you move images gradually without breaking the live site.
 
 Recommended filenames:
 
-hero/pec-hero.jpg
+hero/hero-main.png
 research/research-feature.jpg
 people/ki-min-nam.jpg
 people/gisang-park.jpg
@@ -22,4 +22,4 @@ gallery/group-2026-02.jpg
 gallery/group-2026-03.jpg
 
 When these files are uploaded to GitHub under public/images, the deployed site will automatically use them.
-After all Wix images have been replaced locally, the fallback URLs can be removed from data/media.ts and data/siteData.ts.
+After all Wix images have been replaced locally, the fallback URLs can be removed from data/media.ts, data/members.ts, and data/gallery.ts.

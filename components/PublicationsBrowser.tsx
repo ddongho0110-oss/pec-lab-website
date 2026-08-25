@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Publication } from "../data/siteData";
+import type { Publication } from "../data/publications";
 
 export default function PublicationsBrowser({ publications }: { publications: Publication[] }) {
   const years = useMemo(() => [...new Set(publications.map((p) => p.year))], [publications]);

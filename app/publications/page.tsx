@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "../../components/PageHero";
 import PublicationsBrowser from "../../components/PublicationsBrowser";
-import { publications } from "../../data/siteData";
+import { publications } from "../../data/publications";
 
 export const metadata: Metadata = { title: "Publications" };
 

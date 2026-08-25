@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "../../components/PageHero";
-import { presentations } from "../../data/siteData";
+import { presentations } from "../../data/presentations";
 
 export const metadata: Metadata = { title: "Presentations" };
 

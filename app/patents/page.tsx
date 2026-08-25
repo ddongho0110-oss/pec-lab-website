@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "../../components/PageHero";
-import { patents } from "../../data/siteData";
+import { patents } from "../../data/patents";
 
 export const metadata: Metadata = { title: "Patents" };
 export default function PatentsPage() {

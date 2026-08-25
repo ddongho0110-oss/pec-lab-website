@@ -3,7 +3,7 @@ import Link from "next/link";
 import FallbackImage from "../../components/FallbackImage";
 import PageHero from "../../components/PageHero";
 import { media } from "../../data/media";
-import { members } from "../../data/siteData";
+import { members } from "../../data/members";
 
 export const metadata: Metadata = { title: "Members" };
 const roleOrder = ["Postdoctoral Fellow", "Ph.D. Candidate", "M.S. Candidate", "Undergraduate Student"];

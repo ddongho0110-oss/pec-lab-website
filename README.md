@@ -1,38 +1,60 @@
-# PEC Lab Website — Next.js + Vercel (v4)
+# PEC Lab Website — Next.js + Vercel (v5, collaboration-ready)
 
 Public website for the Photoelectrochemistry & Electrocatalysis Laboratory, Department of Chemistry, Pusan National University.
 
-## v4 changes
+## What changed in v5
 
-- Removed migration/developer notes from public pages.
-- Added the missing professor award entries from the legacy Wix profile.
-- Added DOI support and Google Scholar buttons to Publications.
-- Added DOI links for the four 2026 papers currently at the top of the publication list.
-- Added local-first image loading. Upload the expected files under `public/images/`; until then the site safely falls back to the current Wix-hosted images.
-- Improved mobile navigation, active menu states, accessibility attributes, and mobile overlay behavior.
-- Polished Gallery and Footer text/layout.
-- Updated the default sitemap/robots base URL to the current Vercel deployment.
-- Next.js remains pinned to the patched 15.5.21 release.
+- Split the previous large `data/siteData.ts` into independent content files so multiple lab members can work in parallel.
+- Moved the Professor profile to `data/professor.ts`.
+- Added dedicated files for publications, patents, presentations, members, alumni, news, gallery, and media.
+- Kept `data/siteData.ts` only as a compatibility re-export; collaborators should not edit it.
+- Added `COLLABORATION.md`, `data/README.md`, a Pull Request template, and `CODEOWNERS`.
+- Included the current local Hero image at `public/images/hero/hero-main.png`.
+- Kept the local-first / Wix-fallback image migration strategy.
 
-## Updating the live site
+## Team content files
 
-The easiest route is to upload/replace the changed files in the existing GitHub repository. Vercel will deploy automatically after the commit.
+```text
+data/
+├── professor.ts
+├── publications.ts
+├── patents.ts
+├── presentations.ts
+├── members.ts
+├── alumni.ts
+├── news.ts
+├── gallery.ts
+├── media.ts
+├── README.md
+└── siteData.ts     # compatibility only; do not edit normally
+```
 
-For a complete replacement, copy all files and folders from this project into the repository root, replacing existing files.
+Suggested ownership:
 
-## Images
+| Area | Main file(s) |
+|---|---|
+| Site lead / PI | `data/professor.ts` |
+| Members / Alumni | `data/members.ts`, `data/alumni.ts` |
+| Publications / Patents | `data/publications.ts`, `data/patents.ts` |
+| Presentations | `data/presentations.ts` |
+| News | `data/news.ts` |
+| Gallery / Images | `data/gallery.ts`, `data/media.ts`, `public/images/` |
 
-See `public/images/IMAGE-GUIDE.txt`.
+## Collaboration workflow
 
-The important behavior is **local first, Wix fallback**. For example, once `public/images/people/ki-min-nam.jpg` exists, the Professor page automatically stops using the Wix-hosted portrait.
+1. Invite collaborators to the GitHub repository.
+2. Create a branch from `main` for each task.
+3. Edit the assigned content file only when possible.
+4. Commit and open a Pull Request.
+5. Check the Vercel Preview deployment.
+6. The site lead reviews and merges.
+7. Vercel automatically deploys `main` to production.
 
-This means you do not need to replace every image at once. Do not cancel Wix until all image fallbacks have been replaced and the site has been checked.
+See **`COLLABORATION.md`** for the full workflow.
 
-## Publications
+## Updating publications
 
-All publication data lives in `data/siteData.ts`.
-
-Optional fields:
+Edit only `data/publications.ts`. Example:
 
 ```ts
 {
@@ -47,7 +69,19 @@ Optional fields:
 }
 ```
 
-`doi` creates a DOI button automatically. Every publication also receives a Google Scholar search button.
+`doi` automatically creates a DOI button. Every publication also receives a Google Scholar search button.
+
+## Images
+
+The site currently loads local files first and uses legacy Wix-hosted images only as fallbacks while migration is in progress.
+
+The Hero image is local:
+
+```text
+public/images/hero/hero-main.png
+```
+
+See `public/images/IMAGE-GUIDE.txt` for the remaining expected image paths. Do not cancel Wix until all fallbacks are replaced and verified.
 
 ## Development
 
