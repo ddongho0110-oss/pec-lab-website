@@ -11,11 +11,11 @@ people/ki-min-nam.jpg
 people/gisang-park.jpg
 people/joon-yong-park.jpg
 people/dongho-seo.jpg
-people/amit-kumar-bera.jpg
+people/amit-kumar-bera.png
 people/yuna-hwang.jpg
 people/seung-min-ok.jpg
-people/su-young-kim.jpg
-people/ho-jeong-kim.jpg
+people/su-young-kim.png
+people/ho-jeong-kim.png
 people/yu-rim-song.jpg
 gallery/group-2026-01.jpg
 gallery/group-2026-02.jpg
