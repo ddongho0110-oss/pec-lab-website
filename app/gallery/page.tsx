@@ -1,28 +1,161 @@
 import type { Metadata } from "next";
-import FallbackImage from "../../components/FallbackImage";
+import fs from "node:fs";
+import path from "node:path";
 import PageHero from "../../components/PageHero";
-import { media } from "../../data/media";
-import { gallery } from "../../data/gallery";
 
 export const metadata: Metadata = { title: "Gallery" };
 
-const archive = [
-  "260807 유림이 생일", "260623 대게 회식", "260611 대학원 학술상 시상식", "260606 범어사 등산",
-  "260529 Open Lab", "2026 춘계 대한화학회 in Jeju", "2026 춘계 한국전기화학회", "260220 졸업 축하"
-];
+const IMAGE_EXTENSIONS = /\.(jpg|jpeg|png|webp|gif|avif)$/i;
+
+type GalleryYear = {
+  year: string;
+  images: {
+    src: string;
+    filename: string;
+  }[];
+};
+
+function getGalleryArchive(): GalleryYear[] {
+  const galleryRoot = path.join(
+    process.cwd(),
+    "public",
+    "images",
+    "gallery"
+  );
+
+  if (!fs.existsSync(galleryRoot)) {
+    return [];
+  }
+
+  return fs
+    .readdirSync(galleryRoot, { withFileTypes: true })
+
+    // 2015, 2016 ... 같은 연도 폴더만 인식
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        /^\d{4}$/.test(entry.name)
+    )
+
+    // 최신 연도부터 표시
+    .sort(
+      (a, b) =>
+        Number(b.name) - Number(a.name)
+    )
+
+    .map((entry) => {
+      const year = entry.name;
+      const yearDirectory = path.join(
+        galleryRoot,
+        year
+      );
+
+      const images = fs
+        .readdirSync(yearDirectory, {
+          withFileTypes: true,
+        })
+
+        // 이미지 파일만 인식
+        .filter(
+          (file) =>
+            file.isFile() &&
+            IMAGE_EXTENSIONS.test(file.name)
+        )
+
+        // 파일명 기준 정렬
+        .sort((a, b) =>
+          a.name.localeCompare(
+            b.name,
+            "ko-KR",
+            {
+              numeric: true,
+              sensitivity: "base",
+            }
+          )
+        )
+
+        .map((file) => ({
+          filename: file.name,
+
+          // 한글, 공백, 괄호가 있어도 정상 작동
+          src: `/images/gallery/${year}/${encodeURIComponent(
+            file.name
+          )}`,
+        }));
+
+      return {
+        year,
+        images,
+      };
+    })
+
+    // 사진이 없는 연도는 표시하지 않음
+    .filter(
+      (section) =>
+        section.images.length > 0
+    );
+}
 
 export default function GalleryPage() {
-  return <>
-    <PageHero kicker="LIFE AT PEC" title="Gallery" description="Conferences, celebrations, lab life, and moments from PEC Lab." />
-    <section className="section shell">
-      <div className="gallery-section-heading"><p className="eyebrow">RECENT MOMENTS</p><h2>PEC Lab, in and out of the lab.</h2></div>
-      <div className="gallery-grid gallery-photo-grid">
-        {gallery.map((g, i) => <figure className="gallery-photo-card" key={`${g.title}-${i}`}><FallbackImage primarySrc={media.gallery[i] ?? g.image} fallbackSrc={g.image} alt={g.title} /><figcaption>{g.title}</figcaption></figure>)}
-      </div>
-      <div className="gallery-section-heading archive-heading"><p className="eyebrow">2026 ARCHIVE</p><h2>Lab activities</h2></div>
-      <div className="gallery-grid">
-        {archive.map((g, i) => <article className="gallery-placeholder" key={g}><div className="gallery-index">ARCHIVE {String(i + 1).padStart(2, "0")}</div><p>{g}</p></article>)}
-      </div>
-    </section>
-  </>;
+  const archive = getGalleryArchive();
+
+  return (
+    <>
+      <PageHero
+        kicker="LIFE AT PEC"
+        title="Gallery"
+        description="Conferences, celebrations, lab life, and moments from PEC Lab."
+      />
+
+      <section className="section shell">
+
+        {archive.length === 0 ? (
+          <div className="data-note">
+            Gallery images will appear here when
+            photos are added under
+            public/images/gallery/[year].
+          </div>
+        ) : (
+          archive.map(({ year, images }) => (
+            <div key={year}>
+
+              <div className="gallery-section-heading">
+                <p className="eyebrow">
+                  {year}
+                </p>
+
+                <h2>
+                  {year} Archive
+                </h2>
+              </div>
+
+              <div className="gallery-grid gallery-photo-grid">
+
+                {images.map(
+                  (image, index) => (
+                    <figure
+                      className="gallery-photo-card"
+                      key={image.src}
+                    >
+                      <img
+                        src={image.src}
+                        alt={`PEC Lab ${year} activity ${
+                          index + 1
+                        }`}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+                  )
+                )}
+
+              </div>
+
+            </div>
+          ))
+        )}
+
+      </section>
+    </>
+  );
 }
