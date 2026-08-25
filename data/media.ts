@@ -8,7 +8,7 @@ export const media = {
     fallback: "https://static.wixstatic.com/media/11062b_715e97bca3d7464389d8c02b4a5a49eaf000.jpg/v1/fill/w_980%2Ch_551%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/11062b_715e97bca3d7464389d8c02b4a5a49eaf000.jpg",
   },
   researchFeature: {
-    local: "/images/research/research-feature.jpg",
+    local: "/images/research/research-overview.png",
     fallback: "https://static.wixstatic.com/media/af2495_08ab2a40062a4d859ac7bd7612916161~mv2.jpg/v1/fill/w_588%2Ch_336%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/af2495_08ab2a40062a4d859ac7bd7612916161~mv2.jpg",
   },
   professor: {
