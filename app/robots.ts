@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://pec-lab.vercel.app";
+  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://pec-lab-website-five.vercel.app";
   return {
     rules: { userAgent: "*", allow: "/" },
     sitemap: `${base}/sitemap.xml`,

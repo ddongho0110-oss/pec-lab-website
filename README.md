@@ -1,81 +1,67 @@
-# PEC Lab Website — Next.js + Vercel
+# PEC Lab Website — Next.js + Vercel (v4)
 
-Migration prototype for the Photoelectrochemistry & Electrocatalysis Laboratory, Department of Chemistry, Pusan National University.
+Public website for the Photoelectrochemistry & Electrocatalysis Laboratory, Department of Chemistry, Pusan National University.
 
-## What is included
+## v4 changes
 
-- Home
-- Research
-- Professor
-- Publications — No. 1–94, 2008–2026
-- Patents — current Wix list
-- Presentations — 2019–2026
-- Members — current members
-- News & Awards — current Wix list
-- Gallery — transition structure + three group-photo links
-- Alumni — current Wix list
-- Responsive navigation
-- Publication search + year filter
-- SEO metadata, sitemap, and robots.txt
+- Removed migration/developer notes from public pages.
+- Added the missing professor award entries from the legacy Wix profile.
+- Added DOI support and Google Scholar buttons to Publications.
+- Added DOI links for the four 2026 papers currently at the top of the publication list.
+- Added local-first image loading. Upload the expected files under `public/images/`; until then the site safely falls back to the current Wix-hosted images.
+- Improved mobile navigation, active menu states, accessibility attributes, and mobile overlay behavior.
+- Polished Gallery and Footer text/layout.
+- Updated the default sitemap/robots base URL to the current Vercel deployment.
+- Next.js remains pinned to the patched 15.5.21 release.
 
-## Content management
+## Updating the live site
 
-Most routinely updated content is in:
+The easiest route is to upload/replace the changed files in the existing GitHub repository. Vercel will deploy automatically after the commit.
 
-`data/siteData.ts`
+For a complete replacement, copy all files and folders from this project into the repository root, replacing existing files.
 
-The arrays are:
+## Images
 
-- `publications`
-- `news`
-- `members`
-- `patents`
-- `alumni`
-- `presentations`
-- `gallery`
+See `public/images/IMAGE-GUIDE.txt`.
 
-Adding a paper or award does not require editing the page layout.
+The important behavior is **local first, Wix fallback**. For example, once `public/images/people/ki-min-nam.jpg` exists, the Professor page automatically stops using the Wix-hosted portrait.
 
-## Run locally
+This means you do not need to replace every image at once. Do not cancel Wix until all image fallbacks have been replaced and the site has been checked.
+
+## Publications
+
+All publication data lives in `data/siteData.ts`.
+
+Optional fields:
+
+```ts
+{
+  no: 95,
+  year: 2026,
+  title: "Paper title",
+  authors: "Author A; Author B; Nam, K. M.*",
+  journal: "Journal Name",
+  details: "2026, ...",
+  doi: "10.xxxx/xxxxx",
+  url: "https://publisher-page.example"
+}
+```
+
+`doi` creates a DOI button automatically. Every publication also receives a Google Scholar search button.
+
+## Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
-
-## Build
+Production check:
 
 ```bash
 npm run build
 ```
 
-## Deploy to Vercel
+## Current deployment
 
-1. Create a GitHub repository.
-2. Upload this project to the repository.
-3. In Vercel choose **Add New → Project** and import the repository.
-4. Vercel should detect **Next.js** automatically.
-5. Add an environment variable if you know the final domain:
-
-```text
-NEXT_PUBLIC_SITE_URL=https://your-domain.example
-```
-
-6. Deploy.
-
-## Important before cancelling Wix
-
-The current transition build still references several images hosted on `static.wixstatic.com`:
-
-- professor portrait
-- current member portraits
-- three gallery group photos
-- research/hero visual used in the prototype
-
-Before deleting the Wix site, copy the lab's original image files into this project (for example `public/images/people`, `public/images/gallery`, and `public/images/research`) and replace the remote URLs with local paths. This is the last important step needed to make the new site independent of Wix.
-
-## Notes on migrated text
-
-The website content was transcribed from the lab's current Wix pages in August 2026. Before public launch, quickly proofread publication metadata, conference dates, alumni destinations, and member status because the Wix source contains a few spacing/typographical inconsistencies.
+https://pec-lab-website-five.vercel.app/

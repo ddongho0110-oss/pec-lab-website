@@ -1,0 +1,25 @@
+PEC Lab image replacement guide
+
+The website now looks for LOCAL files first and falls back to the current Wix image if the local file is missing.
+This lets you move images gradually without breaking the live site.
+
+Recommended filenames:
+
+hero/pec-hero.jpg
+research/research-feature.jpg
+people/ki-min-nam.jpg
+people/gisang-park.jpg
+people/joon-yong-park.jpg
+people/dongho-seo.jpg
+people/amit-kumar-bera.jpg
+people/yuna-hwang.jpg
+people/seung-min-ok.jpg
+people/su-young-kim.jpg
+people/ho-jeong-kim.jpg
+people/yu-rim-song.jpg
+gallery/group-2026-01.jpg
+gallery/group-2026-02.jpg
+gallery/group-2026-03.jpg
+
+When these files are uploaded to GitHub under public/images, the deployed site will automatically use them.
+After all Wix images have been replaced locally, the fallback URLs can be removed from data/media.ts and data/siteData.ts.

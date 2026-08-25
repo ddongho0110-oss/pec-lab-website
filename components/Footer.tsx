@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="footer-grid">
         <div>
           <div className="footer-brand">PEC LAB</div>
-          <p>Photoelectrochemistry & Electrocatalysis Laboratory</p>
+          <p className="footer-lead">Photoelectrochemistry & Electrocatalysis Laboratory</p>
           <p>Department of Chemistry, Pusan National University</p>
         </div>
         <div>
@@ -17,13 +17,16 @@ export default function Footer() {
         </div>
         <div>
           <h4>Explore</h4>
+          <p><Link href="/research">Research</Link></p>
           <p><Link href="/publications">Publications</Link></p>
-          <p><Link href="/presentations">Presentations</Link></p>
           <p><Link href="/members">Members</Link></p>
           <p><Link href="/alumni">Alumni</Link></p>
         </div>
       </div>
-      <div className="footer-bottom">© {new Date().getFullYear()} PEC Lab. All rights reserved.</div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} PEC Lab. All rights reserved.</span>
+        <span>Pusan National University · Busan, Republic of Korea</span>
+      </div>
     </footer>
   );
 }

@@ -1,14 +1,13 @@
 import Link from "next/link";
+import FallbackImage from "../components/FallbackImage";
+import { media } from "../data/media";
 import { news, publications } from "../data/siteData";
-
-const heroImage = "https://static.wixstatic.com/media/11062b_715e97bca3d7464389d8c02b4a5a49eaf000.jpg/v1/fill/w_980%2Ch_551%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/11062b_715e97bca3d7464389d8c02b4a5a49eaf000.jpg";
-const researchImage = "https://static.wixstatic.com/media/af2495_08ab2a40062a4d859ac7bd7612916161~mv2.jpg/v1/fill/w_588%2Ch_336%2Cal_c%2Cq_80%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/af2495_08ab2a40062a4d859ac7bd7612916161~mv2.jpg";
 
 export default function Home() {
   return (
     <>
       <section className="hero">
-        <img className="hero-bg" src={heroImage} alt="Abstract water surface" />
+        <FallbackImage className="hero-bg" primarySrc={media.hero.local} fallbackSrc={media.hero.fallback} alt="PEC Lab research visual" />
         <div className="hero-overlay" />
         <div className="hero-content shell">
           <p className="eyebrow light">PHOTOELECTROCHEMISTRY · ELECTROCATALYSIS</p>
@@ -37,23 +36,11 @@ export default function Home() {
 
       <section className="section shell">
         <div className="research-feature">
-          <div className="research-image"><img src={researchImage} alt="Research concept" /></div>
+          <div className="research-image"><FallbackImage primarySrc={media.researchFeature.local} fallbackSrc={media.researchFeature.fallback} alt="PEC Lab research concept" /></div>
           <div className="research-cards">
-            <article className="research-card">
-              <span>01</span>
-              <h3>Electrochemistry</h3>
-              <p>CO₂ reduction, water & seawater splitting, electroanalytical chemistry and selective electrosynthesis.</p>
-            </article>
-            <article className="research-card">
-              <span>02</span>
-              <h3>Photoelectrochemistry</h3>
-              <p>Solar-driven water splitting and CO₂ conversion using semiconductor–catalyst interfaces.</p>
-            </article>
-            <article className="research-card">
-              <span>03</span>
-              <h3>Materials Chemistry</h3>
-              <p>Non-native crystal structures, phase transitions and mechanistic characterization of nanomaterials.</p>
-            </article>
+            <article className="research-card"><span>01</span><h3>Electrochemistry</h3><p>CO₂ reduction, water & seawater splitting, electroanalytical chemistry and selective electrosynthesis.</p></article>
+            <article className="research-card"><span>02</span><h3>Photoelectrochemistry</h3><p>Solar-driven water splitting and CO₂ conversion using semiconductor–catalyst interfaces.</p></article>
+            <article className="research-card"><span>03</span><h3>Materials Chemistry</h3><p>Non-native crystal structures, phase transitions and mechanistic characterization of nanomaterials.</p></article>
           </div>
         </div>
       </section>
@@ -70,7 +57,7 @@ export default function Home() {
                 <div className="pub-no">{String(pub.no).padStart(2, "0")}</div>
                 <div>
                   <div className="pub-meta">{pub.year} · {pub.journal}</div>
-                  <h3>{pub.title}</h3>
+                  <h3>{pub.doi ? <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noreferrer">{pub.title}</a> : pub.title}</h3>
                   <p>{pub.authors}</p>
                 </div>
                 <div className="arrow">↗</div>
@@ -86,13 +73,7 @@ export default function Home() {
           <Link className="text-link" href="/news">All news →</Link>
         </div>
         <div className="news-grid">
-          {news.slice(0, 4).map((item) => (
-            <article className="news-card" key={item.date + item.person}>
-              <div className="news-date">{item.date}</div>
-              <h3>{item.person}</h3>
-              <p>{item.title}</p>
-            </article>
-          ))}
+          {news.slice(0, 4).map((item) => <article className="news-card" key={item.date + item.person}><div className="news-date">{item.date}</div><h3>{item.person}</h3><p>{item.title}</p></article>)}
         </div>
       </section>
 
