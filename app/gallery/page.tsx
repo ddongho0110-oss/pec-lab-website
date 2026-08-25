@@ -109,21 +109,23 @@ export default function GalleryPage() {
       />
 
       <section className="section shell">
+  {archive.length === 0 ? (
+    <div className="data-note">
+      Gallery images will appear here when photos are added under
+      public/images/gallery/[year].
+    </div>
+  ) : (
+    archive.map(({ year, images }) => (
+      <div className="gallery-year-section" key={year}>
+        <div className="gallery-year-heading">
+          <p className="eyebrow">{year}</p>
+        </div>
 
-        {archive.length === 0 ? (
-          <div className="gallery-year-section" key={year}>
-  <div className="gallery-year-heading">
-    <p className="eyebrow">{year}</p>
-  </div>
-
-  <GalleryLightbox images={images} year={year} />
-</div>
-
-            </div>
-          ))
-        )}
-
-      </section>
+        <GalleryLightbox images={images} year={year} />
+      </div>
+    ))
+  )}
+</section>
     </>
   );
 }
