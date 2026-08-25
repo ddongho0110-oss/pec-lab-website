@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import fs from "node:fs";
 import path from "node:path";
 import PageHero from "../../components/PageHero";
+import GalleryLightbox from "../../components/GalleryLightbox";
 
 export const metadata: Metadata = { title: "Gallery" };
 
@@ -110,46 +111,13 @@ export default function GalleryPage() {
       <section className="section shell">
 
         {archive.length === 0 ? (
-          <div className="data-note">
-            Gallery images will appear here when
-            photos are added under
-            public/images/gallery/[year].
-          </div>
-        ) : (
-          archive.map(({ year, images }) => (
-            <div key={year}>
+          <div className="gallery-year-section" key={year}>
+  <div className="gallery-year-heading">
+    <p className="eyebrow">{year}</p>
+  </div>
 
-              <div className="gallery-section-heading">
-                <p className="eyebrow">
-                  {year}
-                </p>
-
-                <h2>
-                  {year} Archive
-                </h2>
-              </div>
-
-              <div className="gallery-grid gallery-photo-grid">
-
-                {images.map(
-                  (image, index) => (
-                    <figure
-                      className="gallery-photo-card"
-                      key={image.src}
-                    >
-                      <img
-                        src={image.src}
-                        alt={`PEC Lab ${year} activity ${
-                          index + 1
-                        }`}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </figure>
-                  )
-                )}
-
-              </div>
+  <GalleryLightbox images={images} year={year} />
+</div>
 
             </div>
           ))
