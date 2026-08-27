@@ -49,7 +49,7 @@ export default function PresentationsPage() {
         </div>
       </section>
 
-      <section className={`section shell>
+      <section className="section shell">
         <div className={styles.heading}>
           <div>
             <p className="eyebrow">CONFERENCE ARCHIVE</p>
