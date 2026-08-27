@@ -1,0 +1,203 @@
+.profile {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: clamp(55px, 7vw, 110px);
+  align-items: center;
+}
+
+.portrait {
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.intro h2 {
+  margin: 0;
+  font-size: clamp(45px, 5vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+
+.intro h2 span {
+  margin-left: 14px;
+  font-size: 16px;
+  letter-spacing: 0;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.nameKo {
+  margin: 15px 0 34px;
+  color: var(--accent);
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  font-weight: 700;
+}
+
+.role {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 42px;
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.contact div {
+  display: grid;
+  gap: 8px;
+}
+
+.contact span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact p,
+.contact a {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.contact a:hover {
+  color: var(--accent);
+}
+
+.focus {
+  margin-top: 35px;
+}
+
+.focusLabel {
+  margin: 0 0 14px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.focusTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.focusTags span {
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--accent-deep);
+}
+
+
+/* CV */
+
+.cvSection {
+  background: #0c2224;
+  color: white;
+  padding: 110px 0 125px;
+}
+
+.cvBlock {
+  display: grid;
+  grid-template-columns: 0.72fr 1.28fr;
+  gap: 70px;
+  padding: 58px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.cvBlock:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.cvHeading .eyebrow {
+  color: #8fcac1;
+}
+
+.cvHeading h2 {
+  margin: 15px 0 0;
+  font-size: clamp(30px, 3vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+
+.timeline {
+  display: grid;
+}
+
+.timelineRow {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 30px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.timelineRow:last-child {
+  border-bottom: 0;
+}
+
+.timelineRow span {
+  color: #8fcac1;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.timelineRow p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+@media (max-width: 900px) {
+  .profile {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .portrait {
+    max-width: 520px;
+  }
+
+  .cvBlock {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .timelineRow {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .cvSection {
+    padding: 75px 0 85px;
+  }
+}
