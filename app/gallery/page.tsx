@@ -3,8 +3,11 @@ import fs from "node:fs";
 import path from "node:path";
 import PageHero from "../../components/PageHero";
 import GalleryLightbox from "../../components/GalleryLightbox";
+import styles from "./gallery.module.css";
 
-export const metadata: Metadata = { title: "Gallery" };
+export const metadata: Metadata = {
+  title: "Gallery",
+};
 
 const IMAGE_EXTENSIONS = /\.(jpg|jpeg|png|webp|gif|avif)$/i;
 
@@ -30,20 +33,15 @@ function getGalleryArchive(): GalleryYear[] {
 
   return fs
     .readdirSync(galleryRoot, { withFileTypes: true })
-
-    // 2015, 2016 ... 같은 연도 폴더만 인식
     .filter(
       (entry) =>
         entry.isDirectory() &&
         /^\d{4}$/.test(entry.name)
     )
-
-    // 최신 연도부터 표시
     .sort(
       (a, b) =>
         Number(b.name) - Number(a.name)
     )
-
     .map((entry) => {
       const year = entry.name;
       const yearDirectory = path.join(
@@ -55,15 +53,11 @@ function getGalleryArchive(): GalleryYear[] {
         .readdirSync(yearDirectory, {
           withFileTypes: true,
         })
-
-        // 이미지 파일만 인식
         .filter(
           (file) =>
             file.isFile() &&
             IMAGE_EXTENSIONS.test(file.name)
         )
-
-        // 파일명 기준 정렬
         .sort((a, b) =>
           a.name.localeCompare(
             b.name,
@@ -74,11 +68,8 @@ function getGalleryArchive(): GalleryYear[] {
             }
           )
         )
-
         .map((file) => ({
           filename: file.name,
-
-          // 한글, 공백, 괄호가 있어도 정상 작동
           src: `/images/gallery/${year}/${encodeURIComponent(
             file.name
           )}`,
@@ -89,8 +80,6 @@ function getGalleryArchive(): GalleryYear[] {
         images,
       };
     })
-
-    // 사진이 없는 연도는 표시하지 않음
     .filter(
       (section) =>
         section.images.length > 0
@@ -100,6 +89,18 @@ function getGalleryArchive(): GalleryYear[] {
 export default function GalleryPage() {
   const archive = getGalleryArchive();
 
+  const totalPhotos = archive.reduce(
+    (total, section) =>
+      total + section.images.length,
+    0
+  );
+
+  const latestYear =
+    archive[0]?.year ?? "—";
+
+  const earliestYear =
+    archive[archive.length - 1]?.year ?? "—";
+
   return (
     <>
       <PageHero
@@ -108,24 +109,74 @@ export default function GalleryPage() {
         description="Conferences, celebrations, lab life, and moments from PEC Lab."
       />
 
-      <section className="section shell">
-  {archive.length === 0 ? (
-    <div className="data-note">
-      Gallery images will appear here when photos are added under
-      public/images/gallery/[year].
-    </div>
-  ) : (
-    archive.map(({ year, images }) => (
-      <div className="gallery-year-section" key={year}>
-        <div className="gallery-year-heading">
-          <p className="eyebrow">{year}</p>
+      <section className={`shell ${styles.summary}`}>
+        <div className={styles.summaryItem}>
+          <span>PHOTOS</span>
+          <strong>{totalPhotos}</strong>
+          <p>Lab moments</p>
         </div>
 
-        <GalleryLightbox images={images} year={year} />
-      </div>
-    ))
-  )}
-</section>
+        <div className={styles.summaryItem}>
+          <span>ARCHIVE</span>
+          <strong>
+            {earliestYear}–{latestYear}
+          </strong>
+          <p>Gallery history</p>
+        </div>
+
+        <div className={styles.summaryItem}>
+          <span>YEARS</span>
+          <strong>{archive.length}</strong>
+          <p>Photo collections</p>
+        </div>
+      </section>
+
+      <section className={`section shell ${styles.gallery}`}>
+        <div className={styles.heading}>
+          <div>
+            <p className="eyebrow">PEC LAB MOMENTS</p>
+            <h2>Beyond the laboratory.</h2>
+          </div>
+
+          <p>
+            A visual archive of conferences, academic events,
+            celebrations, and everyday moments shared by PEC Lab members.
+          </p>
+        </div>
+
+        {archive.length === 0 ? (
+          <div className={styles.empty}>
+            Gallery images will appear here when photos are added under
+            public/images/gallery/[year].
+          </div>
+        ) : (
+          <div className={styles.archive}>
+            {archive.map(({ year, images }) => (
+              <section
+                className={styles.yearBlock}
+                key={year}
+              >
+                <div className={styles.yearHeading}>
+                  <h2>{year}</h2>
+                  <span>
+                    {images.length}{" "}
+                    {images.length === 1
+                      ? "photo"
+                      : "photos"}
+                  </span>
+                </div>
+
+                <div className={styles.photos}>
+                  <GalleryLightbox
+                    images={images}
+                    year={year}
+                  />
+                </div>
+              </section>
+            ))}
+          </div>
+        )}
+      </section>
     </>
   );
 }
