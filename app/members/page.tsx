@@ -54,7 +54,7 @@ export default function MembersPage() {
         </div>
       </section>
 
-      <section className={`section shell ${styles.team}`}>
+      <section className={`section shell>
         <div className={styles.heading}>
           <div>
             <p className="eyebrow">OUR TEAM</p>
@@ -68,7 +68,7 @@ export default function MembersPage() {
           </p>
         </div>
 
-        <div className={styles.roleList}>
+        <div>
           {roleOrder.map((role) => {
             const roleMembers = members.filter(
               (member) => member.role === role
