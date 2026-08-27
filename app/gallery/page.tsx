@@ -131,7 +131,7 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      <section className={`section shell ${styles.gallery}`}>
+      <section className={`section shell>
         <div className={styles.heading}>
           <div>
             <p className="eyebrow">PEC LAB MOMENTS</p>
