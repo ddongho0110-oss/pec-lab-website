@@ -54,7 +54,7 @@ export default function MembersPage() {
         </div>
       </section>
 
-      <section className={`section shell>
+      <section className="section shell">
         <div className={styles.heading}>
           <div>
             <p className="eyebrow">OUR TEAM</p>
