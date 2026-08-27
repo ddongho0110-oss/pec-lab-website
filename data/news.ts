@@ -1,5 +1,6 @@
 export type NewsItem = { date: string; person: string; title: string };
 export const news: NewsItem[] = [
+  { date: "2026.06.11", person: "서동호", title: "대학원 학술상" },
   { date: "2025.10.29", person: "김지윤", title: "부산대학교 화학과 제8회 Chemistry Fair 우수 발표상–최우수상" },
   { date: "2025.10.29", person: "오다연", title: "부산대학교 화학과 제8회 Chemistry Fair 우수포스터 발표상" },
   { date: "2025.04.02", person: "서동호", title: "한국전기화학회 2025년도 춘계총회 및 학술발표회 우수포스터 발표상" },
