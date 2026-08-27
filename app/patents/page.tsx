@@ -44,7 +44,7 @@ export default function PatentsPage() {
         </div>
       </section>
 
-      <section className={`section shell ${styles.archive}`}>
+      <section className={`section shell>
         <div className={styles.heading}>
           <div>
             <p className="eyebrow">PATENT PORTFOLIO</p>
