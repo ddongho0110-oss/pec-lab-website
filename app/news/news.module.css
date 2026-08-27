@@ -1,0 +1,174 @@
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.summaryItem {
+  padding: 34px 38px;
+  border-right: 1px solid var(--line);
+}
+
+.summaryItem:last-child {
+  border-right: 0;
+}
+
+.summaryItem span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.summaryItem strong {
+  display: block;
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.summaryItem p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* Archive */
+
+.heading {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 70px;
+  align-items: end;
+  margin-bottom: 70px;
+}
+
+.heading h2 {
+  margin: 0;
+  max-width: 700px;
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.heading > p {
+  margin: 0;
+  max-width: 480px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.yearList {
+  display: grid;
+}
+
+.yearBlock {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 45px;
+  padding-bottom: 76px;
+}
+
+.yearHeading {
+  padding-top: 4px;
+}
+
+.yearHeading h2 {
+  margin: 0;
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.yearHeading span {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.newsList {
+  border-top: 1px solid var(--line);
+}
+
+.newsRow {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 28px;
+  padding: 30px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.date {
+  padding-top: 5px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.person {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.content h3 {
+  margin: 0;
+  max-width: 850px;
+  font-size: 19px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+
+@media (max-width: 800px) {
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryItem {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .summaryItem:last-child {
+    border-bottom: 0;
+  }
+
+  .heading {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .yearBlock {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-bottom: 62px;
+  }
+}
+
+@media (max-width: 600px) {
+  .newsRow {
+    grid-template-columns: 65px 1fr;
+    gap: 15px;
+    padding: 26px 0;
+  }
+
+  .content h3 {
+    font-size: 17px;
+  }
+}
