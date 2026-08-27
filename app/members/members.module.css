@@ -1,0 +1,236 @@
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.summaryItem {
+  padding: 34px 38px;
+  border-right: 1px solid var(--line);
+}
+
+.summaryItem:last-child {
+  border-right: 0;
+}
+
+.summaryItem span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.summaryItem strong {
+  display: block;
+  font-size: clamp(30px, 3vw, 44px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.summaryItem p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* Team */
+
+.heading {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 70px;
+  align-items: end;
+  margin-bottom: 78px;
+}
+
+.heading h2 {
+  margin: 0;
+  font-size: clamp(38px, 4vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+
+.heading > p {
+  margin: 0;
+  max-width: 480px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.roleSection {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 46px;
+  padding: 0 0 90px;
+}
+
+.roleHeading {
+  padding-top: 4px;
+}
+
+.roleHeading h2 {
+  margin: 0;
+  max-width: 160px;
+  font-size: 14px;
+  line-height: 1.45;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+}
+
+.roleHeading span {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.card {
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: white;
+}
+
+.photo {
+  aspect-ratio: 4 / 5;
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.cardCopy {
+  padding: 22px 22px 25px;
+}
+
+.role {
+  margin: 0 0 9px;
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.cardCopy h3 {
+  margin: 0 0 14px;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.cardCopy a {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.cardCopy a:hover {
+  color: var(--accent);
+}
+
+.alumniLink {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 5px;
+  border-top: 1px solid var(--line);
+}
+
+.alumniLink a {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 0;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.alumniLink span {
+  color: var(--accent);
+  font-size: 18px;
+}
+
+
+@media (max-width: 980px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .roleSection {
+    grid-template-columns: 150px 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryItem {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .summaryItem:last-child {
+    border-bottom: 0;
+  }
+
+  .heading {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .roleSection {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-bottom: 70px;
+  }
+
+  .roleHeading h2 {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo {
+    aspect-ratio: 4 / 4.5;
+  }
+}
