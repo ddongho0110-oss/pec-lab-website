@@ -1,31 +1,140 @@
 import type { Metadata } from "next";
-import FallbackImage from "../../components/FallbackImage";
 import PageHero from "../../components/PageHero";
-import { media } from "../../data/media";
 import { professor } from "../../data/professor";
+import styles from "./professor.module.css";
 
-export const metadata: Metadata = { title: "Professor" };
+export const metadata: Metadata = {
+  title: "Professor",
+};
+
+const researchFocus = [
+  "Electrochemistry",
+  "Photoelectrochemistry",
+  "Electrocatalysis",
+  "Materials Chemistry",
+];
 
 export default function ProfessorPage() {
-  return <>
-    <PageHero kicker="PRINCIPAL INVESTIGATOR" title={professor.name} description={`${professor.role}, ${professor.department}, ${professor.institution}`} />
-    <section className="section shell professor-grid">
-      <div className="portrait-card"><FallbackImage primarySrc={media.professor.local} fallbackSrc={media.professor.fallback} alt={`Professor ${professor.name}`} /></div>
-      <div className="profile-copy">
-        <p className="profile-name-ko">{professor.nameKo}</p>
-        <h2>{professor.name}, {professor.degree}</h2>
-        <p className="profile-role">{professor.role} · {professor.department} · {professor.institution}</p>
-        <div className="contact-strip"><a href={`mailto:${professor.email}`}>{professor.email}</a><span>{professor.phone}</span></div>
-        <div className="profile-section"><h3>Research Experience</h3><ul>
-          {professor.researchExperience.map((item) => <li key={item.period + item.description}><strong>{item.period}</strong> {item.description}</li>)}
-        </ul></div>
-        <div className="profile-section"><h3>Education</h3><ul>
-          {professor.education.map((item) => <li key={item.period + item.description}><strong>{item.period}</strong> {item.description}</li>)}
-        </ul></div>
-        <div className="profile-section"><h3>Awards</h3><ul>
-          {professor.awards.map((item) => <li key={item.year + item.description}><strong>{item.year}</strong> {item.description}</li>)}
-        </ul></div>
-      </div>
-    </section>
-  </>;
+  return (
+    <>
+      <PageHero
+        kicker="PRINCIPAL INVESTIGATOR"
+        title={professor.name}
+        description={`${professor.role}, ${professor.department}, ${professor.institution}`}
+      />
+
+      <section className={`section shell ${styles.profile}`}>
+        <div className={styles.portrait}>
+          <img
+            src="/images/people/ki-min-nam.jpg"
+            alt={`Professor ${professor.name}`}
+          />
+        </div>
+
+        <div className={styles.intro}>
+          <p className="eyebrow">PRINCIPAL INVESTIGATOR</p>
+
+          <h2>
+            {professor.name}
+            <span>{professor.degree}</span>
+          </h2>
+
+          <p className={styles.nameKo}>{professor.nameKo}</p>
+
+          <p className={styles.role}>
+            {professor.role}
+            <br />
+            {professor.department}
+            <br />
+            {professor.institution}
+          </p>
+
+          <div className={styles.contact}>
+            <div>
+              <span>Email</span>
+              <a href={`mailto:${professor.email}`}>
+                {professor.email}
+              </a>
+            </div>
+
+            <div>
+              <span>Phone</span>
+              <p>{professor.phone}</p>
+            </div>
+          </div>
+
+          <div className={styles.focus}>
+            <p className={styles.focusLabel}>Research Focus</p>
+
+            <div className={styles.focusTags}>
+              {researchFocus.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.cvSection}>
+        <div className="shell">
+          <div className={styles.cvBlock}>
+            <div className={styles.cvHeading}>
+              <p className="eyebrow">01</p>
+              <h2>Research Experience</h2>
+            </div>
+
+            <div className={styles.timeline}>
+              {professor.researchExperience.map((item) => (
+                <div
+                  className={styles.timelineRow}
+                  key={item.period + item.description}
+                >
+                  <span>{item.period}</span>
+                  <p>{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.cvBlock}>
+            <div className={styles.cvHeading}>
+              <p className="eyebrow">02</p>
+              <h2>Education</h2>
+            </div>
+
+            <div className={styles.timeline}>
+              {professor.education.map((item) => (
+                <div
+                  className={styles.timelineRow}
+                  key={item.period + item.description}
+                >
+                  <span>{item.period}</span>
+                  <p>{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.cvBlock}>
+            <div className={styles.cvHeading}>
+              <p className="eyebrow">03</p>
+              <h2>Awards & Honors</h2>
+            </div>
+
+            <div className={styles.timeline}>
+              {professor.awards.map((item) => (
+                <div
+                  className={styles.timelineRow}
+                  key={item.year + item.description}
+                >
+                  <span>{item.year}</span>
+                  <p>{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }
