@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "../../components/PageHero";
+import styles from "./research.module.css";
 
 export const metadata: Metadata = {
   title: "Research",
@@ -9,10 +10,11 @@ const areas = [
   {
     n: "01",
     title: "Electrochemistry",
+    image: "/images/research/electrochemistry.png",
     lead:
-      "We investigate and control electrochemical reactions at electrified interfaces for selective and sustainable chemical conversion.",
+      "Controlling electrochemical reactions at electrified interfaces for selective and sustainable chemical conversion.",
     description:
-      "Our research focuses on understanding how electrode materials, electrolytes, and interfacial environments govern reaction pathways and product selectivity. We develop electrochemical systems for energy conversion, molecular synthesis, and analytical applications.",
+      "Our research focuses on how electrode materials, electrolytes, and interfacial environments govern reaction pathways and product selectivity. We develop electrochemical systems for energy conversion, molecular synthesis, and analytical applications.",
     topics: [
       "CO₂ Reduction Reaction",
       "Water & Seawater Splitting",
@@ -23,8 +25,9 @@ const areas = [
   {
     n: "02",
     title: "Photoelectrochemistry",
+    image: "/images/research/photoelectrochemistry.png",
     lead:
-      "We couple semiconductor light absorbers with catalytic interfaces to drive chemical reactions using solar energy.",
+      "Coupling semiconductor light absorbers with catalytic interfaces to drive chemical reactions using solar energy.",
     description:
       "Our photoelectrochemical studies integrate light absorption, charge separation, interfacial catalysis, and reaction engineering. Particular emphasis is placed on semiconductor–catalyst interfaces for solar-driven water splitting and CO₂ conversion.",
     topics: [
@@ -37,10 +40,11 @@ const areas = [
   {
     n: "03",
     title: "Materials Chemistry",
+    image: "/images/research/materials-chemistry.png",
     lead:
-      "We design nanomaterials beyond conventional equilibrium structures and investigate their structural evolution during reactions.",
+      "Designing nanomaterials beyond conventional equilibrium structures and understanding their structural evolution.",
     description:
-      "We explore non-native crystal structures, metastable phases, and nanoscale interfaces to establish structure–property relationships. Structural and mechanistic characterization is used to reveal how functional materials transform under synthesis and reaction conditions.",
+      "We explore non-native crystal structures, metastable phases, and nanoscale interfaces to establish structure–property relationships. Structural and mechanistic characterization reveals how functional materials transform under synthesis and reaction conditions.",
     topics: [
       "Non-native Crystal Structures",
       "Phase Transitions",
@@ -59,9 +63,10 @@ export default function ResearchPage() {
         description="We combine electrochemistry, photoelectrochemistry, materials synthesis, and mechanistic characterization to understand and control energy-relevant chemical reactions."
       />
 
-      <section className="section shell research-overview-section">
-        <div className="research-overview-copy">
+      <section className={`section shell ${styles.overview}`}>
+        <div className={styles.overviewCopy}>
           <p className="eyebrow">OUR APPROACH</p>
+
           <h2>
             From materials to
             <br />
@@ -77,35 +82,45 @@ export default function ResearchPage() {
           </p>
         </div>
 
-        <div className="research-overview-figure">
+        <figure className={styles.overviewFigure}>
           <img
             src="/images/research/research-overview.png"
-            alt="Overview of PEC Lab research in electrochemistry, photoelectrochemistry, and materials chemistry"
+            alt="Overview of PEC Lab research"
           />
-        </div>
+        </figure>
       </section>
 
-      <section className="research-detail-section">
+      <section className={styles.areasSection}>
         <div className="shell">
-          <div className="research-detail-heading">
+          <div className={styles.areasHeading}>
             <p className="eyebrow">RESEARCH AREAS</p>
             <h2>What we study.</h2>
           </div>
 
-          <div className="research-area-list">
-            {areas.map((area) => (
-              <article className="research-area" key={area.n}>
-                <div className="research-area-number">{area.n}</div>
-
-                <div className="research-area-title">
-                  <h2>{area.title}</h2>
-                  <p>{area.lead}</p>
+          <div className={styles.areaList}>
+            {areas.map((area, index) => (
+              <article
+                className={`${styles.area} ${
+                  index % 2 === 1 ? styles.areaReverse : ""
+                }`}
+                key={area.n}
+              >
+                <div className={styles.visual}>
+                  <img src={area.image} alt={`${area.title} research`} />
                 </div>
 
-                <div className="research-area-content">
-                  <p>{area.description}</p>
+                <div className={styles.copy}>
+                  <p className={styles.number}>{area.n}</p>
 
-                  <div className="research-topic-list">
+                  <h3>{area.title}</h3>
+
+                  <p className={styles.lead}>{area.lead}</p>
+
+                  <p className={styles.description}>
+                    {area.description}
+                  </p>
+
+                  <div className={styles.topics}>
                     {area.topics.map((topic) => (
                       <span key={topic}>{topic}</span>
                     ))}
