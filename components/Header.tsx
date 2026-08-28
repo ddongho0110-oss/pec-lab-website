@@ -20,7 +20,9 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -31,8 +33,8 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="site-header">
-      <div className={`header-inner ${styles.headerInner}`}>
+    <header className={`site-header ${styles.header}`}>
+      <div className={styles.headerInner}>
         <Link
           href="/"
           className={styles.logo}
@@ -45,7 +47,9 @@ export default function Header() {
         </Link>
 
         <button
-          className={open ? "menu-button open" : "menu-button"}
+          className={`${styles.menuButton} ${
+            open ? styles.menuButtonOpen : ""
+          }`}
           onClick={() => setOpen(!open)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -58,27 +62,23 @@ export default function Header() {
 
         <nav
           id="site-navigation"
-          className={open ? "nav open" : "nav"}
+          className={`${styles.nav} ${
+            open ? styles.navOpen : ""
+          }`}
         >
           {nav.map(([label, href]) => (
             <Link
               key={href}
               href={href}
-              className={pathname === href ? "active" : ""}
+              className={
+                pathname === href ? styles.active : ""
+              }
             >
               {label}
             </Link>
           ))}
         </nav>
       </div>
-
-      {open && (
-        <button
-          className="nav-overlay"
-          aria-label="Close menu"
-          onClick={() => setOpen(false)}
-        />
-      )}
     </header>
   );
 }
