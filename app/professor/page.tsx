@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import PageHero from "../../components/PageHero";
 import { professor } from "../../data/professor";
 import styles from "./professor.module.css";
 
@@ -17,13 +16,20 @@ const researchFocus = [
 export default function ProfessorPage() {
   return (
     <>
-      <PageHero
-        kicker="PRINCIPAL INVESTIGATOR"
-        title={professor.name}
-        description={`${professor.role}, ${professor.department}, ${professor.institution}`}
-      />
-
       <section className={`section shell ${styles.profile}`}>
+        <div className={styles.heading}>
+          <p className="eyebrow">PRINCIPAL INVESTIGATOR</p>
+
+          <h1>
+            <span>{professor.name}</span>
+            <small>{professor.degree}</small>
+          </h1>
+
+          <p className={styles.nameKo}>
+            {professor.nameKo}
+          </p>
+        </div>
+
         <div className={styles.portrait}>
           <img
             src="/images/people/ki-min-nam.jpg"
@@ -31,16 +37,7 @@ export default function ProfessorPage() {
           />
         </div>
 
-        <div className={styles.intro}>
-          <p className="eyebrow">PRINCIPAL INVESTIGATOR</p>
-
-          <h2>
-            {professor.name}
-            <span>{professor.degree}</span>
-          </h2>
-
-          <p className={styles.nameKo}>{professor.nameKo}</p>
-
+        <div className={styles.details}>
           <p className={styles.role}>
             {professor.role}
             <br />
@@ -52,6 +49,7 @@ export default function ProfessorPage() {
           <div className={styles.contact}>
             <div>
               <span>Email</span>
+
               <a href={`mailto:${professor.email}`}>
                 {professor.email}
               </a>
@@ -59,16 +57,21 @@ export default function ProfessorPage() {
 
             <div>
               <span>Phone</span>
+
               <p>{professor.phone}</p>
             </div>
           </div>
 
           <div className={styles.focus}>
-            <p className={styles.focusLabel}>Research Focus</p>
+            <p className={styles.focusLabel}>
+              Research Focus
+            </p>
 
             <div className={styles.focusTags}>
               {researchFocus.map((item) => (
-                <span key={item}>{item}</span>
+                <span key={item}>
+                  {item}
+                </span>
               ))}
             </div>
           </div>
