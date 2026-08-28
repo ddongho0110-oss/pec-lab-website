@@ -54,10 +54,12 @@ function getGalleryArchive(): GalleryYear[] {
           withFileTypes: true,
         })
         .filter(
-          (file) =>
-            file.isFile() &&
-            IMAGE_EXTENSIONS.test(file.name)
-        )
+  (file) =>
+    file.isFile() &&
+    !file.name.startsWith(".") &&
+    (IMAGE_EXTENSIONS.test(file.name) ||
+      path.extname(file.name) === "")
+)
         .sort((a, b) =>
           a.name.localeCompare(
             b.name,
