@@ -11,6 +11,25 @@ export const metadata: Metadata = {
 
 const IMAGE_EXTENSIONS = /\.(jpg|jpeg|png|webp|gif|avif)$/i;
 
+function getPhotoDate(filename: string) {
+  // KakaoTalk_20260223_093658571.jpg
+  // 20221212 ACEPS...
+  const eightDigit = filename.match(/(?:19|20)\d{6}/);
+
+  if (eightDigit) {
+    return Number(eightDigit[0]);
+  }
+
+  // 220515 스승의날.jpg 같은 형식
+  const sixDigit = filename.match(/(?:^|[^\d])(\d{6})(?:[^\d]|$)/);
+
+  if (sixDigit) {
+    return Number(`20${sixDigit[1]}`);
+  }
+
+  return 0;
+}
+
 type GalleryYear = {
   year: string;
   images: {
@@ -54,22 +73,29 @@ function getGalleryArchive(): GalleryYear[] {
           withFileTypes: true,
         })
         .filter(
-  (file) =>
-    file.isFile() &&
-    !file.name.startsWith(".") &&
-    (IMAGE_EXTENSIONS.test(file.name) ||
-      path.extname(file.name) === "")
-)
-        .sort((a, b) =>
-          a.name.localeCompare(
-            b.name,
+          (file) =>
+            file.isFile() &&
+            !file.name.startsWith(".") &&
+            (IMAGE_EXTENSIONS.test(file.name) ||
+              path.extname(file.name) === "")
+        )
+        .sort((a, b) => {
+          const dateA = getPhotoDate(a.name);
+          const dateB = getPhotoDate(b.name);
+
+          if (dateA !== dateB) {
+            return dateB - dateA;
+          }
+
+          return b.name.localeCompare(
+            a.name,
             "ko-KR",
             {
               numeric: true,
               sensitivity: "base",
             }
-          )
-        )
+          );
+        })
         .map((file) => ({
           filename: file.name,
           src: `/images/gallery/${year}/${encodeURIComponent(
