@@ -1,3 +1,9 @@
+.headerInner {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 28px;
+}
+
 .logo {
   display: flex;
   align-items: center;
@@ -14,14 +20,22 @@
 }
 
 @media (max-width: 1120px) {
+  .headerInner {
+    padding: 0 22px;
+  }
+
   .logo img {
     width: 185px;
   }
 }
 
 @media (max-width: 640px) {
+  .headerInner {
+    padding: 0 16px;
+  }
+
   .logo img {
-    width: 160px;
+    width: 158px;
     max-height: 48px;
   }
 }
