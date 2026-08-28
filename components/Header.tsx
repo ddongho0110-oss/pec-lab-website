@@ -32,7 +32,7 @@ export default function Header() {
 
   return (
     <header className="site-header">
-      <div className="header-inner">
+      <div className={`header-inner ${styles.headerInner}`}>
         <Link
           href="/"
           className={styles.logo}
