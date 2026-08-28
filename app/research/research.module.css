@@ -178,7 +178,9 @@
   .visual {
     padding: 14px;
   }
-
+  .copy h3 {
+    font-size: 32px;
+  }
   .lead {
     font-size: 17px;
   }
